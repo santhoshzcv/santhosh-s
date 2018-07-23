@@ -1,0 +1,30 @@
+body{
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 32px;
+height:100vh;
+}
+.login-layout {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+border: 1px solid #d9d9d9;
+box-shadow: 6px 2px 14px 0px #d9d9d9;
+max-width: 400px;
+width: 400px;
+max-height: 400px;
+height: 400px;
+}
+.login-layout>.app-name {
+padding: 23px;
+}
+.login-layout>input {
+margin: 12px;
+}
+#js-name-err-msg,#js-pass-err-msg{
+    font:5px;
+}
+
