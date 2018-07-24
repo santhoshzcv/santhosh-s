@@ -1,0 +1,29 @@
+ css file
+  table {
+border: 1px solid #d9d9d9;
+border-collapse: collapse;
+}
+table>thead>tr>th {
+padding: 12px;
+text-align: left;
+}
+table>tbody>tr:hover {
+background-color: #f0f0f0;
+}
+table>tbody>tr>td {
+padding: 12px;
+text-align: left;
+}
+.fields {
+margin: 21px;
+border: 1px solid #d9d9d9;
+padding: 21px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+.fields>input {
+margin: 11px;
+width: 40%;
+}
