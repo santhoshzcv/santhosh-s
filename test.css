@@ -1,0 +1,22 @@
+.layout{
+    display:flex;
+    max-width: 400px;
+    width:400px;
+    max-height:400px;
+    height:400px;
+    border:2px solid green;
+    align-items:center;
+   justify-content:center;
+    flex-direction:column;
+}
+body{
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+
+
+
+
+
