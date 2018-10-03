@@ -1,0 +1,13 @@
+<h1>Simple Calculator</h1>
+<input #n1="ngModel" type="text"[(ngModel)]="res" class="inputtest" pattern="\d*" />
+<div *ngIf="n1.invalid && (n1.dirty || n1.touched)"
+class="alert alert-danger">
+<div *ngIf="n1.errors.pattern">
+Enter the number
+</div>
+</div>
+<div class="maindiv">
+        <div class="subdiv" *ngFor="let iteam of  iteams; let i = index">
+                <button  (click)="getAbc(iteams[i])" >{{iteams[i]}}</button>
+        </div>
+</div>

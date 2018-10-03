@@ -1,0 +1,21 @@
+button{
+    width:100px;
+    height:50px;
+}
+input{
+    width:500px;
+    height:50px;
+}
+.maindiv{
+    width: 454px;
+}
+.subdiv{
+    display: inline-block;
+}
+.alert-danger{
+    color: red;
+    padding: 5px;
+}
+.inputtest{
+    width:394px
+}

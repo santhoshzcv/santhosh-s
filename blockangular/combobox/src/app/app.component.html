@@ -1,0 +1,18 @@
+<form>
+<mat-form-field class="example-full-width">
+    <input matInput name="address" #addres="ngModel" type="text" placeholder="address"  [(ngModel)]="food.address" required >
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+  <p>Your address: {{food.address}}</p>
+<br><br>
+  <mat-form-field>
+  <mat-select [(value)]="food.network">
+    <mat-option value="rinkeby">Rinkeby</mat-option>
+    <mat-option value="ropsten">Ropsten</mat-option>
+    <mat-option value="kovan">Kovan</mat-option>
+  </mat-select>
+</mat-form-field><br>
+<button mat-raised-button (click)="sendData(food)">Balance</button>
+</form>
+<p>You selected: {{food.network}}</p>
+<p *ngIf="!show">Your available balance: {{balance}}</p>
