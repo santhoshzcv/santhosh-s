@@ -1,3 +1,109 @@
-<p>
-  register works!
-</p>
+<div>
+  <div class="card-holder">
+    <mat-card class="card">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onregisterSubmit()">
+       <div>
+         <!-- firstname -->
+         <div class = "inline">
+          <mat-form-field>
+            <input id="firstname" 
+                   matInput
+                   formControlName="firstname"
+                   [(ngModel)]="user.firstname"
+                   placeholder="Firstname" [errorStateMatcher]="matcher">
+                   <mat-error *ngIf="!registerForm.hasError('required')">
+                      Enter valid firtName
+                  </mat-error>
+          </mat-form-field>  
+           <!-- lastname -->
+           <mat-form-field>
+              <input id="lastname" 
+                     matInput
+                     formControlName="lastname"
+                     [(ngModel)]="user.lastname"
+                     placeholder="Lastname" [errorStateMatcher]="matcher">
+                     <mat-error *ngIf="!registerForm.hasError('required')">
+                        Enter  valid lastName
+                      </mat-error>
+             </mat-form-field> 
+            </div><br/>
+           <!-- email field -->
+           <mat-form-field>
+              <input id="email" 
+                     matInput
+                     formControlName="email"
+                     [(ngModel)]="user.email"
+                     placeholder="Email" [errorStateMatcher]="matcher">          
+               <mat-error *ngIf="!registerForm.hasError('email')">
+               Enter valid EmailId
+               </mat-error>   
+            </mat-form-field>
+             <!--date of birth  -->
+            <mat-form-field>
+                <input id="dob" 
+                       matInput  f
+                       formControlName="dob" 
+                       [matDatepicker]="picker" 
+                       [(ngModel)]="user.dob"  
+                       placeholder="DOB" [errorStateMatcher]="matcher">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="!registerForm.hasError('required')">
+                    select valid dob
+                 </mat-error>
+            </mat-form-field>
+          
+              <br/>
+            <!--  phonenumber-->
+            <br />
+            <mat-form-field>
+                <input id="phonenumber" 
+                       matInput
+                       formControlName="phonenumber"
+                       [(ngModel)]="user.phonenumber"
+                       placeholder="Phonenumber" [errorStateMatcher]="matcher">   
+                       <mat-error *ngIf="!registerForm.hasError('pattern')">
+                          Enter valid PhoneNumber
+                      </mat-error> 
+            </mat-form-field>
+            <!-- password -->
+            <mat-form-field>
+                <input id="password" 
+                formControlName="password"
+                 matInput  [(ngModel)]="user.password"
+                 placeholder="Password" 
+                 [type]="hide ? 'password' : 'text'" [errorStateMatcher]="matcher">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf="!registerForm.hasError('pattern')">
+                  Minimum eight characters, at least one letter, one number and one special character:
+                </mat-error>
+            </mat-form-field>
+            
+
+        <!-- state -->
+              <br/>
+              <br/>
+        <mat-form-field>
+          <mat-select placeholder="Select State" formControlName="state" [(ngModel)]="user.state" [errorStateMatcher]="matcher">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!registerForm.hasError('required')">
+              select your state
+          </mat-error>
+        </mat-form-field>
+
+        <!-- gender -->
+        <mat-radio-group formControlName="gender" [(ngModel)]="user.gender">
+          <mat-radio-button  value="Male">Male</mat-radio-button>
+          <mat-radio-button  value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+              <br/>
+              <br/>
+            <button mat-button type="submit"  [disabled]="!registerForm.valid">register</button>
+            <button mat-button color="warn" type="button" routerLink="/user/login" routerLinkActive="active">login</button>
+       </div>
+    </form>
+  </mat-card>
+  </div>
+</div>

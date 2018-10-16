@@ -1,0 +1,22 @@
+.card{
+    
+   text-align: center;
+    max-width: 800px;   
+}
+.card>.inline{
+    display: inline; 
+    max-width: 200px;   
+}
+.card-holder{
+    margin-left: 30%;
+}
+mat-form-field{
+   width:350px;
+   margin-left: 50px; 
+}
+mat-radio-button {
+    margin-left: 50px;
+}
+mat-radio-group{
+    margin-left: 50px;
+}
