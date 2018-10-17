@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   user: RegisterModel = new RegisterModel();
   registerForm: FormGroup;
+  data:any;
 
 
   constructor(private fb: FormBuilder, private authservice: AuthServiceService,private router:Router) {
@@ -46,8 +47,11 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
     this.authservice.registerUser(this.registerForm.value).subscribe(
       (res) => {
-        console.log(res)
-        swal("Good job!", "You registered sucessfully!", "success");
+        debugger;
+        this.data=res['token']
+        console.log(this.data);
+        //localStorage.setItem('token',this.data);
+        swal("Great", "You registered sucessfully!", "success");
         this.router.navigate(['user/login'])
       }
 

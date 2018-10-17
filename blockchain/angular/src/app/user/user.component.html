@@ -1,8 +1,10 @@
-<p>
-  user works!
-</p>
 
-<button mat-button color="warn" routerLink="/user/register" routerLinkActive="active">register</button>
+
+<button mat-button color="warn" *ngIf="!authservice.loggedIn()" routerLink="/user/register" routerLinkActive="active">register</button>
+<button mat-button color="warn"  routerLink="/user/home" routerLinkActive="active">home</button>
+<button mat-button color="warn" *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">login</button>
+<button mat-button color="warn" *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">logout</button>
+
 
 
 <router-outlet></router-outlet>
