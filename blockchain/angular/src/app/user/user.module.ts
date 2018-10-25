@@ -13,12 +13,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
 import {MatNativeDateModule,MatIconModule} from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import {CdkTableModule} from '@angular/cdk/table';
 import { TokenInterceptorService } from './AuthService/token-interceptor.service';
 import { AuthGuard } from './AuthService/auth.guard';
 import { AuthServiceService } from './AuthService/auth-service.service';
+import { MatPaginatorModule } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -36,7 +40,11 @@ import { AuthServiceService } from './AuthService/auth-service.service';
     MatIconModule,
     MatRadioModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    CdkTableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   declarations: [LoginComponent, RegisterComponent, HomeComponent,UserComponent],
   providers:[ AuthGuard,AuthServiceService,{

@@ -10,7 +10,8 @@ const userSchema = new Schema({
     lastname:String,
     password:String,
     phonenumber:Number,
-    state:String    
+    state:String,  
+    isadmin:String 
 })
 
 module.exports=mongoose.model('user',userSchema,'users')

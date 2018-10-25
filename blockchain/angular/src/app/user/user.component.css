@@ -1,0 +1,21 @@
+button{
+    font-size: 30px;
+}
+.home{
+    color:white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    padding-top: 25px;
+    margin-right: 1600px;
+    padding-left:30px;
+}
+.login{
+    color:white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-align-last: right;
+    padding-left:1800px;
+}
+mat-button{
+    margin-left: 50px;
+}

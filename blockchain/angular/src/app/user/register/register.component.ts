@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
+   
   user: RegisterModel = new RegisterModel();
   registerForm: FormGroup;
   data:any;
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
       'email': [this.user.email, [Validators.required, Validators.email]],
       'dob': [this.user.dob, [Validators.required]],
       'phonenumber': [this.user.phonenumber, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      //'password': [this.user.password, [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       'password': [this.user.password, [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       'gender': [this.user.gender, [Validators.required]],
       'state': [this.user.state, [Validators.required]]
@@ -46,14 +48,20 @@ export class RegisterComponent implements OnInit {
     console.log("santhosh")
     console.log(this.registerForm.value);
     this.authservice.registerUser(this.registerForm.value).subscribe(
-      (res) => {
-        debugger;
-        this.data=res['token']
-        console.log(this.data);
+      
+    (res) => {
+           if(res['message']){
+             console.log(res['message']);
+            swal("you have been already registered");
+            }
+            else{
+            this.data=res['token']
+            console.log(this.data);
         //localStorage.setItem('token',this.data);
-        swal("Great", "You registered sucessfully!", "success");
-        this.router.navigate(['user/login'])
-      }
+            swal("Great", "You registered sucessfully!", "success");
+             this.router.navigate(['user/login'])
+           }
+    }
 
     )
     this.registerForm.reset();
@@ -63,7 +71,7 @@ export class RegisterComponent implements OnInit {
 /** Error when invalid control is dirty or touched*/
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && control.invalid && (control.dirty || control.touched));
-
+    return !!(control && control.invalid && (control.dirty || control.touched ));
   }
 }
+

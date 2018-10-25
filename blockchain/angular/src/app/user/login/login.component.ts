@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   LoginForm:FormGroup
   data:any;
+  error1:any;
   login:Login = new Login()
 
   constructor(private fb:FormBuilder,private authservice:AuthServiceService,private router:Router) {
@@ -28,14 +29,22 @@ export class LoginComponent implements OnInit {
     console.log(this.LoginForm.value);
     this.authservice.loginUser(this.LoginForm.value).subscribe(
       (res)=>{
-       console.log(res)
+       //console.log(res.message)
+       if(res['message']=='yes'){
+       this.data=res['token']
+       localStorage.setItem('token',this.data)
+       swal("Good job!", "you loged in successfully!", "success");
+       this.router.navigate(['admin/home']);
+       }
+       else{
        this.data=res['token']
        localStorage.setItem('token',this.data)
        swal("Good job!", "you loged in successfully!", "success");
        this.router.navigate(['user/home']);
+       }
       },
       (err)=>{
-        console.log(err)
+        this.error1=err.error.message;
      } )
   }
 

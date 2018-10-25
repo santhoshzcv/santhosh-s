@@ -1,3 +1,36 @@
-<p>
-  login works!
-</p>
+<div class="card-holder">
+    <mat-card class="card">
+      <h2>Admin Login Form</h2><br />
+        <form [formGroup]="LoginForm" (ngSubmit)="LoginForm.valid && onLoginSubmit()">
+     <mat-form-field>
+        <input id="email" 
+               matInput
+               formControlName="email"
+               [(ngModel)]="login.email"
+               placeholder="Email" [errorStateMatcher]="matcher">          
+         <mat-error *ngIf="!LoginForm.hasError('email')">
+         Enter valid EmailId
+         </mat-error>   
+      </mat-form-field>
+      <br/>
+      <br/>
+      <mat-form-field>
+          <input type="password" id="password" 
+          formControlName="password"
+           matInput  [(ngModel)]="login.password"
+           placeholder="Password" 
+           [type]="hide ? 'password' : 'text'" [errorStateMatcher]="matcher">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="!LoginForm.hasError('pattern')">
+            Minimum eight characters, at least one letter, one number and one special character:
+          </mat-error>
+      </mat-form-field>
+      <br/>
+      <br/>
+      <button class="login" mat-button type="submit"  [disabled]="!LoginForm.valid">Login</button>  
+      <button class="register" mat-button color="warn" type="button" routerLink="/admin/register" routerLinkActive="active">Register</button>
+      <br/><sup>(If Not Registered)</sup> 
+    </form>
+    <strong>{{error1}}</strong>
+    </mat-card>
+    </div>

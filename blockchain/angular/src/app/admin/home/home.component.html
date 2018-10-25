@@ -1,3 +1,95 @@
-<p>
-  home works!
-</p>
+<!-- <mat-card class="example-card">
+    <mat-form-field>
+        <mat-select placeholder="Select network">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let network of networks" [value]="network">{{network}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </mat-card>
+   -->
+   <!-- Account creation -->
+<mat-card class="card">
+  <h2>Account Creation</h2>
+  <form [formGroup]="CreateAccount" (ngSubmit)="CreateAccount.valid && onLoginSubmit()">
+    <mat-form-field>
+       <input id="name" 
+              matInput
+              formControlName="name"
+              [(ngModel)]="account.name"
+              placeholder="name" >             
+     </mat-form-field>
+     <br/>
+     <br/>
+     <mat-form-field>
+         <input type="password" id="password" 
+         formControlName="password"
+          matInput  [(ngModel)]="account.password"
+          placeholder="Password" 
+          [type]="hide ? 'password' : 'text'">
+         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+         
+     </mat-form-field>
+     <br>
+     
+    <button  mat-raised-button color="primary" *ngIf="!spin" type="submit"  [disabled]="!CreateAccount.valid">create</button>
+    <mat-spinner [diameter]="75" *ngIf="spin">
+    </mat-spinner>
+     </form>
+     {{address}}
+    </mat-card>
+    <!-- card for balance checking -->
+  <mat-card class="card1">
+      <h2>Check Balance</h2>
+    <mat-form-field>
+      <input
+             matInput
+             [(ngModel)]="name"
+             placeholder="enter name" >             
+    </mat-form-field>
+    <button  mat-raised-button color="primary" (click)="balance()">balance</button>
+  </mat-card>
+  <!-- card for transactions -->
+<mat-card class="card2">
+  <h2>Transactions</h2>
+  <form [formGroup]="Transactions" (ngSubmit)="Transactions.valid && onTransactionSubmit()">
+      <mat-form-field>
+         <input id="faddress" 
+                matInput
+                formControlName="faddress"
+                [(ngModel)]="transaction.faddress"
+                placeholder="From" >             
+       </mat-form-field> 
+        <br/> 
+       <br/>
+       <mat-form-field>
+          <input id="taddress" 
+                 matInput
+                 formControlName="taddress"
+                 [(ngModel)]="transaction.taddress"
+                 placeholder="To" >             
+        </mat-form-field>
+        <br/>
+        <br/> 
+      
+    <mat-form-field>
+        <input id="ether" 
+               matInput
+               formControlName="ether"
+               [(ngModel)]="transaction.ether"
+               placeholder="Ether" >             
+      </mat-form-field> 
+      <br/>
+      <br/>
+     <mat-form-field> 
+        <input type="password" id="password1" 
+        formControlName="password1"
+         matInput  [(ngModel)]="transaction.password1"
+         placeholder="Password" 
+         [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+      <br/>
+      <br/>
+      <button  mat-raised-button color="primary"  type="submit"  [disabled]="!Transactions.valid">Transfer</button>
+    </form>
+</mat-card>

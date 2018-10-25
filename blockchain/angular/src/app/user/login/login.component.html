@@ -1,5 +1,6 @@
 <div class="card-holder">
 <mat-card class="card">
+  <h2>User Login Form</h2><br />
     <form [formGroup]="LoginForm" (ngSubmit)="LoginForm.valid && onLoginSubmit()">
  <mat-form-field>
     <input id="email" 
@@ -26,8 +27,10 @@
   </mat-form-field>
   <br/>
   <br/>
-  <button mat-button type="submit"  [disabled]="!LoginForm.valid">Login</button>
-  <button mat-button color="warn" type="button" routerLink="/user/register" routerLinkActive="active">register</button>
-  </form>
+  <button class="login" mat-button type="submit"  [disabled]="!LoginForm.valid">Login</button>  
+  <button class="register" mat-button color="warn" type="button" routerLink="/user/register" routerLinkActive="active">Register</button>
+  <br/><sup>(If Not Registered)</sup> 
+</form>
+<strong>{{error1}}</strong>
 </mat-card>
 </div>

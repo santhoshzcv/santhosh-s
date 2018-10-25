@@ -1,10 +1,10 @@
 
-
-<button mat-button color="warn" *ngIf="!authservice.loggedIn()" routerLink="/user/register" routerLinkActive="active">register</button>
-<button mat-button color="warn"  routerLink="/user/home" routerLinkActive="active">home</button>
-<button mat-button color="warn" *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">login</button>
-<button mat-button color="warn" *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">logout</button>
-
+<h2 style="background: linear-gradient(to left,  #a644e2 10%,#81b1ef 50%);margin-top: 0%; height: 90px; width:100%">
+<!-- <button mat-button color="warn" *ngIf="!authservice.loggedIn()" routerLink="/user/register" routerLinkActive="active">register</button> -->
+<!-- <button class="home" mat-button *ngIf="!authservice.loggedIn()" routerLink="/admin/login" routerLinkActive="active">Admin Login</button> -->
+<!-- <button class="login" mat-button  *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">Login</button> -->
+<br /><a class="login"  *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">Logout</a>
+</h2>
 
 
 <router-outlet></router-outlet>

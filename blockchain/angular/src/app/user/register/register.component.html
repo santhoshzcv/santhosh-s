@@ -1,6 +1,7 @@
 <div>
   <div class="card-holder">
     <mat-card class="card">
+      <br/><h2>Registration</h2>
     <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onregisterSubmit()">
        <div>
          <!-- firstname -->
@@ -78,7 +79,6 @@
                   Minimum eight characters, at least one letter, one number and one special character:
                 </mat-error>
             </mat-form-field>
-            
 
         <!-- state -->
               <br/>
@@ -100,8 +100,8 @@
         </mat-radio-group>
               <br/>
               <br/>
-            <button mat-button type="submit"  [disabled]="!registerForm.valid">register</button>
-            <button mat-button color="warn" type="button" routerLink="/user/login" routerLinkActive="active">login</button>
+            <button class="register" mat-button type="submit"  [disabled]="!registerForm.valid">register</button>
+            <button class="login" mat-button color="warn" type="button" routerLink="/user/login" routerLinkActive="active">login</button>
        </div>
     </form>
   </mat-card>

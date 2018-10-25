@@ -1,12 +1,11 @@
-<p>
-  admin works!
-</p>
+<h2 style="background: linear-gradient(to left,  #a644e2 10%,#81b1ef 50%);margin-top: 0%; height: 90px; width:100%">
+<!-- <button mat-raised-button color="accent" routerLink="/admin/register" routerLinkActive="active">register</button> -->
+<button class="home" mat-button *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">User Login</button>
+<!-- <button class="login" mat-button  *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">Login</button> -->
+<br /><a class="login"  *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">Logout</a>
+</h2>
 
-<mat-card>
-<button mat-raised-button color="accent" routerLink="/admin/register" routerLinkActive="active">register</button>
-<button mat-raised-button color="accent"routerLink="/admin/home" routerLinkActive="active">home</button>
-<button mat-raised-button color="accent"routerLink="/admin/login" routerLinkActive="active">login</button>
 <router-outlet></router-outlet>
-</mat-card>
+
 
 
