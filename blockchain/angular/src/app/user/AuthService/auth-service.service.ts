@@ -8,8 +8,8 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient,private router:Router) { }
 
-  private   _registerurl = "http://localhost:3001/api/register";
-  private  _loginurl = "http://localhost:3001/api/login" ;
+  private   _registerurl = "http://localhost:3002/api/register";
+  private  _loginurl = "http://localhost:3002/api/login" ;
  
 
   registerUser(user){

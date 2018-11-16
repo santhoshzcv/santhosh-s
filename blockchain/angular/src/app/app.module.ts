@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -31,7 +31,9 @@ import {MatNativeDateModule} from '@angular/material';
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
-    MatDatepickerModule,MatNativeDateModule
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

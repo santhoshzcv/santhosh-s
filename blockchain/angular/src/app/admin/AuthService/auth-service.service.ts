@@ -11,9 +11,11 @@ export class AuthServiceService {
   constructor(private http: HttpClient,private router:Router) { }
 
 //private   _registerurl = "http://localhost:3000/api/adminregister";
-private  _loginurl = "http://localhost:3001/api/adminlogin" ;
-private _accounturl = "http://localhost:3001/api/accounts";
-private _balanceurl = "http://localhost:3001/api/balance"
+private  _loginurl = "http://localhost:3002/api/adminlogin" ;
+private _accounturl = "http://localhost:3002/api/accounts";
+private _balanceurl = "http://localhost:3002/api/balance";
+private _transactionurl =  "http://localhost:3002/api/transaction1";
+private _listTransactionUrl = "http://localhost:3002/api/list";
 loginUser(user){
   return this.http.post(this._loginurl,user);
 }
@@ -26,12 +28,17 @@ logoutUser(){
   this.router.navigate(['user/login']);
 }
 createAcc(account){
-  debugger;
   return this.http.post(this._accounturl,account)
 }
 checkBalance(balance){
   return this.http.post(this._balanceurl,balance)
 }
-
+sendTransaction(transaction){
+  debugger;
+  return this.http.post(this._transactionurl,transaction)
+}
+listTransaction(){
+  return this.http.get(this._listTransactionUrl);
+}
 }
  

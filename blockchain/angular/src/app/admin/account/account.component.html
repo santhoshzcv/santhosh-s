@@ -1,0 +1,29 @@
+<mat-card class="card">
+  <h2>Account Creation</h2>
+  <form [formGroup]="CreateAccount" (ngSubmit)="CreateAccount.valid && onLoginSubmit()">
+    <mat-form-field>
+       <input id="name" 
+              matInput
+              formControlName="name"
+              [(ngModel)]="account.name"
+              placeholder="name" >             
+     </mat-form-field>
+     <br/>
+     <br/>
+     <mat-form-field>
+         <input type="password" id="password" 
+         formControlName="password"
+          matInput  [(ngModel)]="account.password"
+          placeholder="Password" 
+          [type]="hide ? 'password' : 'text'">
+         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+         
+     </mat-form-field>
+     <br>
+     
+    <button  mat-raised-button color="primary" *ngIf="!spin" type="submit"  [disabled]="!CreateAccount.valid">create</button>
+    <!-- <mat-spinner [diameter]="75" *ngIf="spin">
+    </mat-spinner> -->
+     </form>
+     <p>your address is <br>{{address}}</p>
+    </mat-card>

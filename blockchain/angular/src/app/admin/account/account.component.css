@@ -2,6 +2,8 @@
     width:400px;
     height:400px;
     text-align: center;
+    margin-left:700px;
+    margin-top: 170px;
  }
  mat-form-field{
     width:410px;
@@ -16,22 +18,3 @@ h2{
     text-decoration:underline;
     color: brown;
 }
-mat-spinner {
-    margin-left:166px;
-    bottom:40px;
-  }
-  .card1{
-    width:400px;
-    height:300px;
-    text-align: center;
-    left:500px;
-    bottom:450px;
- }
- .card2{
-    width:500px;
-    height:550px;
-    text-align: center;
-    left:1000px;
-    bottom:800px;
- }
-   

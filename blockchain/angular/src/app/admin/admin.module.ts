@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin.component';
 
@@ -20,12 +18,17 @@ import {MatNativeDateModule,MatIconModule} from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {CdkTableModule} from '@angular/cdk/table';
+import {NgxPaginationModule} from 'ngx-pagination';
 //import { TokenInterceptorService } from './AuthService/token-interceptor.service';
 //import { AuthGuard } from './AuthService/auth.guard';
 import { AuthServiceService } from './AuthService/auth-service.service';
 import { MatPaginatorModule } from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { TransactionComponent } from './transaction/transaction.component';
+import { AccountComponent } from './account/account.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { BalanceComponent } from './balance/balance.component';
 
 
 
@@ -51,8 +54,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxPaginationModule
   ],
-  declarations: [LoginComponent, RegisterComponent, HomeComponent, AdminComponent]
+  declarations: [HomeComponent, AdminComponent, TransactionComponent, AccountComponent, TransactionsComponent, BalanceComponent]
 })
 export class AdminModule { }

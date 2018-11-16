@@ -1,0 +1,68 @@
+<!-- 
+<input id="myInput" type="text" placeholder="Search..">
+<div class="mat-elevation-z8">
+ <table>
+  <thead>
+    <tr>
+    <th style="width:20%">from address</th>
+    <th style="width:20%">to address</th>
+    <th style="width:10%">ether</th>
+    <th style="width:25%">date</th>
+    <th style="width:25%">transactionHash</th>
+  </tr>
+   </thead>
+  <tbody  id="myTable">
+    <tr *ngFor="let emp of list  | paginate: { itemsPerPage: 5, currentPage: p }" >
+      <td>{{emp.faddress}}</td>
+      <td>{{emp.taddress}}</td>
+      <td style="padding-left:79px">{{emp.ether}}</td>
+      <td>{{emp.date}}</td>
+      <td>{{emp.transactionHash}}</td>
+    </tr>
+  </tbody>
+</table> 
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div> -->
+<mat-card>
+<h2>Transaction Details</h2>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+ 
+  <!-- Name Column -->
+  <ng-container matColumnDef="from">
+    <th mat-header-cell *matHeaderCellDef> From </th>
+    <td mat-cell *matCellDef="let element"> {{element.from}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="to">
+    <th mat-header-cell *matHeaderCellDef> To </th>
+    <td mat-cell *matCellDef="let element"> {{element.to}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="ether">
+    <th mat-header-cell *matHeaderCellDef> Ether </th>
+    <td mat-cell *matCellDef="let element"> {{element.ether}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date and Time </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="transactionHash">
+    <th mat-header-cell *matHeaderCellDef> TransactionHash </th>
+    <td mat-cell *matCellDef="let element"> {{element.transactionHash}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</mat-card>

@@ -1,0 +1,45 @@
+<mat-card class="card2">
+  <h2>Transactions</h2>
+  <form [formGroup]="Transactions" (ngSubmit)="Transactions.valid && onTransactionSubmit()">
+      <mat-form-field>
+         <input id="from" 
+                matInput
+                formControlName="from"
+                [(ngModel)]="transaction.from"
+                placeholder="From" >             
+       </mat-form-field> 
+        <br/> 
+       <br/>
+       <mat-form-field>
+          <input id="to" 
+                 matInput
+                 formControlName="to"
+                 [(ngModel)]="transaction.to"
+                 placeholder="To" >             
+        </mat-form-field>
+        <br/>
+        <br/> 
+      
+    <mat-form-field>
+        <input id="ether" 
+               matInput
+               formControlName="ether"
+               [(ngModel)]="transaction.ether"
+               placeholder="Ether" >             
+      </mat-form-field> 
+      <br/>
+      <br/>
+     <mat-form-field> 
+        <input type="password" id="password1" 
+        formControlName="password1"
+         matInput  [(ngModel)]="transaction.password1"
+         placeholder="Password" 
+         [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+      <br/>
+      <br/>
+      <button  mat-raised-button color="primary"  type="submit"  [disabled]="!Transactions.valid">Transfer</button>
+    </form> 
+</mat-card>
+

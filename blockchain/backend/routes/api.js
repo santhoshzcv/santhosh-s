@@ -1,12 +1,14 @@
 const express = require('express')
-
 const Web3=require('web3');
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const Admin = require('../models/admin')
 const Account = require('../models/account')
+const Transaction = require('../models/transaction');
 const mongoose = require('mongoose')
+var datetime = require('node-datetime');
+var lowerCase = require('lower-case')
 const db = "mongodb://santhosh123:santhosh123@ds133533.mlab.com:33533/eventsdb"
 
 mongoose.connect(db, { useNewUrlParser: true },err=>{
@@ -113,26 +115,30 @@ router.post('/adminlogin',(req,res)=>{
 
 router.post('/accounts',(req,res)=>{
     let userData = req.body;
-    //console.log(userData);
+    console.log(userData);
     let user1 = new Account(userData)
-    //console.log(user1);
-
-     web3.eth.personal.newAccount(userData.password).then((result)=>{
-         user1.address=result;  
-         console.log(user1.address)  
-         user1.save((err,user)=>{
-             if(err){
-                 res.send("not saved")
-             }else{
-                 res.status(200).send(user)
-             }
-         })
-    
-     })
+    console.log(user1);
+            web3.eth.personal.newAccount(userData.password).then((result)=>{
+                
+                user1.address=lowerCase(result);  
+                console.log(user1.address)  
+                user1.save((err,user)=>{
+                    if(err){
+                        res.send("not saved")
+                    }else{
+                        console.log(user);
+                        res.status(200).send(user)
+                    }
+                })
+     })  
 })
 ///api for checking the balance
 router.post('/balance',(req,res)=>{
     let userData = req.body;
+    web3.eth.net.isListening((err,res1)=>{
+        if(err){
+            console.log("connected not local geth");
+        }else{
     Account.findOne({name:userData.name},(error,user)=>{
      if(error){
          console.log(error)
@@ -140,45 +146,169 @@ router.post('/balance',(req,res)=>{
      else{ 
       if(!user){
          res.status(200).send({message:"user not found"})
-     }else {
+     }else{
         web3.eth.getBalance(user.address).then((balance) => {
-            balance= web3.utils.fromWei(balance, 'ether')
-         res.status(200).send(balance);
+        balance= web3.utils.fromWei(balance, 'ether')
+        res.status(200).send(balance);
         })
      }
     }
-    })  
+
+     }) 
+    }
+  }) 
 })
+
+
 // api for trasactions
 router.post('/transaction',(req,res)=>{
     let userData = req.body;
-    console.log(userData);
-    web3.eth.personal.unlockAccount(userData.faddress,userData.password)
+    // console.log(userData.faddress);
+    let user1 = new Transaction(userData)
+    console.log(user1);
+    web3.eth.net.isListening((err,res1)=>{
+        if(err){
+            console.log("not connected local geth");
+        }else{
+    web3.eth.personal.unlockAccount(userData.faddress,userData.password1)
     .then((response) => {
         console.log(response);
-        res.status(200).send("transaction pending");
+        res.status(200).send({message:"transaction is pending since it is not mined"});
         web3.eth.sendTransaction({
             from:userData.faddress,
             to: userData.taddress,
             value: Web3.utils.toWei(userData.ether, 'ether')
          }).then((receipt)=>{
-            console.log(receipt)
             
+            var dt = datetime.create();
+            var formatted = dt.format('m/d/Y H:M:S');
+            user1.transactionHash=receipt.transactionHash;
+            user1.date=formatted;
+            user1.taddress=lowerCase(user1.taddress)
+
+            console.log(user1);
+            user1.save((err,user)=>{
+                if(err){
+                    res.send("not saved")
+                }else{
+                    console.log(user);
+                }
+            })
          })
 
     }).catch((error) => {
         console.log(error);
    });
+       
+}
+   
+})
+
+})
+
+
+
+// api for list of transactions
+router.get('/list',(req,res)=>{
+    Transaction.find({}, function(err, data) {
+        if (err) {
+          console.log(err);
+          return res.send(500, 'Something Went wrong with Retrieving data');
+        } else {
+          // console.log(data[0]);
+          res.json(data);
+        }
+    })
+})
+// api for trasactions
+router.post('/transaction1',(req,res)=>{
+    let userData = req.body;
+    let user1 = new Transaction(userData)
+    // console.log(userData.faddress);
+    // let user1 = new Transaction(userData)
+    // console.log(user1);
+    let faddress;
+    let taddress;
+  Account.findOne({ name:userData.from},function(err,user){
+    if(err){
+        console.log(err);
+    }else{
+        faddress=user.address;
+        console.log(faddress);
+    }
     
 })
-//api for list accounts
-router.get('/list',(req,res)=>{
-    web3.eth.getAccounts((err,res1)=>{
-        res.status(200).send(res1);
+Account.findOne({ name:userData.to},function(err,user){
+    if(err){
+        console.log(err);
+    }else{
+        taddress = user.address;
+        console.log(taddress);
+    }
+    
+    web3.eth.net.isListening((err,res1)=>{
+        if(err){
+            console.log("not connected local geth");
+        }else{
+    web3.eth.personal.unlockAccount(faddress,userData.password1)
+    .then((response) => {
+        console.log(response);
+        res.status(200).send({message:"transaction is pending since it is not mined"});
+        web3.eth.sendTransaction({
+            from:faddress,
+            to: taddress,
+            value: Web3.utils.toWei(userData.ether, 'ether')
+         }).then((receipt)=>{
+            //console.log(receipt);
+            var dt = datetime.create();
+            var formatted = dt.format('m/d/Y H:M:S');
+            console.log(receipt.transactionHash);
+             user1.transactionHash=receipt.transactionHash;
+             console.log(user1.transactionHash);
+             user1.date=formatted;
+             console.log(user1.date);
+              console.log(user1);
+            console.log(user1);
+            user1.save((err,user)=>{
+                if(err){
+                    res.send("not saved")
+                }else{
+                    console.log(user);
+                }
+            })
+         })
+
+    }).catch((error) => {
+        console.log(error);
+   });
+       
+}
+   
+
 })
 })
-// web3.eth.personal.newAccount("810").then((result)=>{
-// console.log(result);
+
+})
+//  web3.eth.personal.newAccount("810").then((result)=>{
+//  console.log(result);
+
+//  })
+//  web3.eth.subscribe('pendingTransactions', function(error, result){
+//     if (!error)
+//         console.log(result);
 // })
+// .on("data", function(transaction){
+//     console.log(transaction);
+// });
+
+web3.eth.net.isListening((err,res1)=>{
+    if(err){
+        console.log("not connected to local geth");
+    }
+    else{ 
+
+        console.log("conneted to local geth")
+    }
+})
 
 module.exports = router

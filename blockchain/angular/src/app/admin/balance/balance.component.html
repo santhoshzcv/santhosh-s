@@ -1,0 +1,11 @@
+<mat-card class="card1">
+  <h2>Check Balance</h2>
+<mat-form-field>
+  <input
+         matInput
+         [(ngModel)]="name"
+         placeholder="enter name" >             
+</mat-form-field>
+<button  mat-raised-button color="primary" (click)="balance()">balance</button>
+<p> your available balance is {{amount}}</p>
+</mat-card>

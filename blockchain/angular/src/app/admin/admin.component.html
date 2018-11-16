@@ -1,10 +1,13 @@
 <h2 style="background: linear-gradient(to left,  #a644e2 10%,#81b1ef 50%);margin-top: 0%; height: 90px; width:100%">
 <!-- <button mat-raised-button color="accent" routerLink="/admin/register" routerLinkActive="active">register</button> -->
+<button class="abcd" mat-button (click)="account()"><span>Account</span></button>
+<button class="abc" mat-button (click)="balance()"><span>Balance</span></button>
+<button class="abc" mat-button (click)="transaction()"><span>Transaction</span></button>
+<button class="abc" mat-button (click)="logs()"><span>Logs</span></button>
 <button class="home" mat-button *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">User Login</button>
 <!-- <button class="login" mat-button  *ngIf="!authservice.loggedIn()" routerLink="/user/login" routerLinkActive="active">Login</button> -->
-<br /><a class="login"  *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">Logout</a>
+<button  class="logout" mat-button *ngIf="authservice.loggedIn()" (click)="authservice.logoutUser()">Logout</button>
 </h2>
-
 <router-outlet></router-outlet>
 
 
