@@ -10,9 +10,9 @@ td, th {
     padding: 8px;
 }
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
     background-color: #dddddd;
-}
+} */
 h2{
     text-align: center;
     font-weight: strong;

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin.component';
 
 
@@ -19,16 +18,18 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {CdkTableModule} from '@angular/cdk/table';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatDialogModule} from '@angular/material/dialog';
 //import { TokenInterceptorService } from './AuthService/token-interceptor.service';
 //import { AuthGuard } from './AuthService/auth.guard';
 import { AuthServiceService } from './AuthService/auth-service.service';
 import { MatPaginatorModule } from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionComponent, DialogOverviewExampleDialog} from './transaction/transaction.component';
 import { AccountComponent } from './account/account.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { BalanceComponent } from './balance/balance.component';
+
 
 
 
@@ -41,6 +42,7 @@ import { BalanceComponent } from './balance/balance.component';
     MatFormFieldModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     MatInputModule,
@@ -57,6 +59,9 @@ import { BalanceComponent } from './balance/balance.component';
     MatProgressSpinnerModule,
     NgxPaginationModule
   ],
-  declarations: [HomeComponent, AdminComponent, TransactionComponent, AccountComponent, TransactionsComponent, BalanceComponent]
+  declarations: [ AdminComponent,  DialogOverviewExampleDialog,TransactionComponent, AccountComponent, TransactionsComponent, BalanceComponent],
+  entryComponents: [
+    DialogOverviewExampleDialog
+]
 })
 export class AdminModule { }

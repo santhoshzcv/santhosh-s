@@ -16,6 +16,7 @@ private _accounturl = "http://localhost:3002/api/accounts";
 private _balanceurl = "http://localhost:3002/api/balance";
 private _transactionurl =  "http://localhost:3002/api/transaction1";
 private _listTransactionUrl = "http://localhost:3002/api/list";
+private _listTransactionUrl1 = "http://localhost:3002/api/list1";
 loginUser(user){
   return this.http.post(this._loginurl,user);
 }
@@ -34,11 +35,13 @@ checkBalance(balance){
   return this.http.post(this._balanceurl,balance)
 }
 sendTransaction(transaction){
-  debugger;
   return this.http.post(this._transactionurl,transaction)
 }
 listTransaction(){
   return this.http.get(this._listTransactionUrl);
+}
+listAddress(transactionHash){
+  return this.http.post(this._listTransactionUrl1,transactionHash)
 }
 }
  

@@ -34,31 +34,31 @@
  
   <!-- Name Column -->
   <ng-container matColumnDef="from">
-    <th mat-header-cell *matHeaderCellDef> From </th>
+    <th mat-header-cell *matHeaderCellDef> <h3>From</h3> </th>
     <td mat-cell *matCellDef="let element"> {{element.from}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="to">
-    <th mat-header-cell *matHeaderCellDef> To </th>
+    <th mat-header-cell *matHeaderCellDef> <h3> To </h3> </th>
     <td mat-cell *matCellDef="let element"> {{element.to}}</td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="ether">
-    <th mat-header-cell *matHeaderCellDef> Ether </th>
+    <th mat-header-cell *matHeaderCellDef><h3> Ether</h3> </th>
     <td mat-cell *matCellDef="let element"> {{element.ether}} </td>
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date and Time </th>
+    <th mat-header-cell *matHeaderCellDef><h3> Date and Time</h3> </th>
     <td mat-cell *matCellDef="let element"> {{element.date}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="transactionHash">
-    <th mat-header-cell *matHeaderCellDef> TransactionHash </th>
-    <td mat-cell *matCellDef="let element"> {{element.transactionHash}} </td>
+    <th mat-header-cell *matHeaderCellDef><h3>TransactionHash</h3> </th>
+    <td mat-cell *matCellDef="let element"><a mat-button (click)="openDialog($event,element.transactionHash)">{{element.transactionHash}}</a></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

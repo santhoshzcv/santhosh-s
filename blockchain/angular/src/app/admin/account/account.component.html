@@ -1,6 +1,7 @@
 <mat-card class="card">
   <h2>Account Creation</h2>
   <form [formGroup]="CreateAccount" (ngSubmit)="CreateAccount.valid && onLoginSubmit()">
+    <!-- form field for name -->
     <mat-form-field>
        <input id="name" 
               matInput
@@ -10,6 +11,7 @@
      </mat-form-field>
      <br/>
      <br/>
+     <!-- form field for password -->
      <mat-form-field>
          <input type="password" id="password" 
          formControlName="password"
@@ -25,5 +27,5 @@
     <!-- <mat-spinner [diameter]="75" *ngIf="spin">
     </mat-spinner> -->
      </form>
-     <p>your address is <br>{{address}}</p>
+     <p><br>{{address}}</p>
     </mat-card>

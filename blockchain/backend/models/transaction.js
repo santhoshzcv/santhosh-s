@@ -7,7 +7,9 @@ const userSchema = new Schema({
   date:String,
   from:String,
   to:String,
-  ether:String
+  ether:String,
+  faddress:String,
+  taddress:String
 })
 
 module.exports=mongoose.model('transaction',userSchema,'transactions')

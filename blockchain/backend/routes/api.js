@@ -137,7 +137,7 @@ router.post('/balance',(req,res)=>{
     let userData = req.body;
     web3.eth.net.isListening((err,res1)=>{
         if(err){
-            console.log("connected not local geth");
+            console.log("not connected to local geth");
         }else{
     Account.findOne({name:userData.name},(error,user)=>{
      if(error){
@@ -149,7 +149,7 @@ router.post('/balance',(req,res)=>{
      }else{
         web3.eth.getBalance(user.address).then((balance) => {
         balance= web3.utils.fromWei(balance, 'ether')
-        res.status(200).send(balance);
+        res.status(200).send({message1:"your available balance ",balance});
         })
      }
     }
@@ -157,53 +157,6 @@ router.post('/balance',(req,res)=>{
      }) 
     }
   }) 
-})
-
-
-// api for trasactions
-router.post('/transaction',(req,res)=>{
-    let userData = req.body;
-    // console.log(userData.faddress);
-    let user1 = new Transaction(userData)
-    console.log(user1);
-    web3.eth.net.isListening((err,res1)=>{
-        if(err){
-            console.log("not connected local geth");
-        }else{
-    web3.eth.personal.unlockAccount(userData.faddress,userData.password1)
-    .then((response) => {
-        console.log(response);
-        res.status(200).send({message:"transaction is pending since it is not mined"});
-        web3.eth.sendTransaction({
-            from:userData.faddress,
-            to: userData.taddress,
-            value: Web3.utils.toWei(userData.ether, 'ether')
-         }).then((receipt)=>{
-            
-            var dt = datetime.create();
-            var formatted = dt.format('m/d/Y H:M:S');
-            user1.transactionHash=receipt.transactionHash;
-            user1.date=formatted;
-            user1.taddress=lowerCase(user1.taddress)
-
-            console.log(user1);
-            user1.save((err,user)=>{
-                if(err){
-                    res.send("not saved")
-                }else{
-                    console.log(user);
-                }
-            })
-         })
-
-    }).catch((error) => {
-        console.log(error);
-   });
-       
-}
-   
-})
-
 })
 
 
@@ -215,7 +168,20 @@ router.get('/list',(req,res)=>{
           console.log(err);
           return res.send(500, 'Something Went wrong with Retrieving data');
         } else {
-          // console.log(data[0]);
+          res.json(data);
+        }
+    })
+})
+//with addresss
+router.post('/list1',(req,res)=>{
+    let userData = req.body;
+    console.log(userData);
+    Transaction.findOne({transactionHash:userData.transactionHash}, function(err, data) {
+        if (err) {
+          console.log(err);
+          return res.send(500, 'Something Went wrong with Retrieving data');
+        } else {
+            console.log(data);
           res.json(data);
         }
     })
@@ -224,9 +190,6 @@ router.get('/list',(req,res)=>{
 router.post('/transaction1',(req,res)=>{
     let userData = req.body;
     let user1 = new Transaction(userData)
-    // console.log(userData.faddress);
-    // let user1 = new Transaction(userData)
-    // console.log(user1);
     let faddress;
     let taddress;
   Account.findOne({ name:userData.from},function(err,user){
@@ -265,6 +228,8 @@ Account.findOne({ name:userData.to},function(err,user){
             console.log(receipt.transactionHash);
              user1.transactionHash=receipt.transactionHash;
              console.log(user1.transactionHash);
+             user1.faddress=receipt.from;
+             user1.taddress=receipt.to;
              user1.date=formatted;
              console.log(user1.date);
               console.log(user1);
@@ -289,17 +254,7 @@ Account.findOne({ name:userData.to},function(err,user){
 })
 
 })
-//  web3.eth.personal.newAccount("810").then((result)=>{
-//  console.log(result);
 
-//  })
-//  web3.eth.subscribe('pendingTransactions', function(error, result){
-//     if (!error)
-//         console.log(result);
-// })
-// .on("data", function(transaction){
-//     console.log(transaction);
-// });
 
 web3.eth.net.isListening((err,res1)=>{
     if(err){
@@ -308,7 +263,10 @@ web3.eth.net.isListening((err,res1)=>{
     else{ 
 
         console.log("conneted to local geth")
+       
     }
 })
+
+
 
 module.exports = router

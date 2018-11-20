@@ -10,6 +10,7 @@ export class BalanceComponent implements OnInit {
 name:String;
 name1:{};
 amount:any;
+message:any;
 
   constructor(private service:AuthServiceService) { }
 
@@ -23,7 +24,9 @@ amount:any;
       if(res['message']){
         swal("message:"+res['message'])
       }else{
-        this.amount=res;
+        console.log(res);
+        this.amount=res['balance'];
+        this.message=res['message1']
       //swal("your balance is "+res)
       }
     })
