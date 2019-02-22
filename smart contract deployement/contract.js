@@ -14,9 +14,10 @@ for (var contractName in output.contracts) {
     const abi = output.contracts[contractName].interface;
     const helloWorldContract = web3.eth.contract(JSON.parse(abi));
     console.log('unlocking local geth account');
-    const password = "810";
+  
     try {
-        web3.personal.unlockAccount("0x2463f4C2404Ac36ebe5DA89bFe788ddFA8D11C47", password);
+   web3.personal.unlockAccount("0xaf01f28ecde578c0c0f2d3c303ac39e4a307d6c7", "Accion")
+        
     } catch (e) {
         console.log(e);
         return;
@@ -24,7 +25,7 @@ for (var contractName in output.contracts) {
     console.log("Deploying the contract");
     const helloWorldContractInstance = helloWorldContract.new({
         data: '0x' + bytecode,
-        from: "0x2463f4C2404Ac36ebe5DA89bFe788ddFA8D11C47",
+        from: "0xaf01f28ecde578c0c0f2d3c303ac39e4a307d6c7",
         gas: 2000000
     }, (err, res) => {
         if (err) {
